@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 128
+      minimum-idle: 0
+      idle-timeout: 60000
+      connection-test-query: SELECT 1
+server:
+  port: 8080
