@@ -10,8 +10,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author charles tao
@@ -20,11 +19,12 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class ThreadExecutorConfig {
 
-    @Bean("fixedPoolExecutor")
-    public ExecutorService fixedPoolExecutor() {
-        return Executors.newFixedThreadPool(16);
+    @Bean("fixedBlockingExecutor")
+    public ExecutorService fixedBlockingExecutor() {
+        return new ThreadPoolExecutor(16, 16,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(100));
     }
-
 
     /**
      * scheduler 多线程执行
